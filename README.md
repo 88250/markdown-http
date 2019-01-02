@@ -1,2 +1,3 @@
 # http-marked
-http-marked for symphony, pipe and solo
+
+包装 [Marked](https://github.com/markedjs/marked) 作为 HTTP 服务发布。
