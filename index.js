@@ -6,12 +6,12 @@
  */
 
 /**
- * @fileoverview marked HTTP server.
+ * @fileoverview Marked HTTP server.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.2.0.1, Aug 20, 2018
- * @since 1.7.0
+ * @version 1.2.0.2, Jan 2, 2019
+ * @since 1.0.0
  */
 
 const http = require('http');
