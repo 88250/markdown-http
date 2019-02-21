@@ -73,5 +73,5 @@ const server = http.createServer(function (request, response) {
   });
 });
 
-server.listen(PORT);
+server.listen(PORT, '127.0.0.1');
 console.log("Marked engine is running at port: " + PORT);
