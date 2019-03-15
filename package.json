@@ -28,7 +28,6 @@
   "devDependencies": {
     "highlight.js": "^9.15.6",
     "markdown-it": "^8.4.2",
-    "markdown-it-task-checkbox": "^1.0.6",
     "marked": "^0.6.1"
   }
 }

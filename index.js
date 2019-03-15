@@ -12,6 +12,8 @@ const RENDER = 'markdown-it' // support 'markdown-it', 'marked'
 const TASKLICLASS = 'content-reset__task'
 const hljs = require('highlight.js')
 
+const task = require('./markdown-it-task')
+
 class MD {
   init () {
     switch (RENDER) {
@@ -80,12 +82,7 @@ class MD {
       linkify: true,
       typographer: true,
       highlight: this.highlight,
-    }).use(require('markdown-it-task-checkbox'), {
-      disabled: true,
-      divWrap: false,
-      ulClass: '',
-      liClass: TASKLICLASS,
-    })
+    }).use(task)
   }
 }
 
