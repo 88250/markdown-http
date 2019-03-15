@@ -1,77 +1,137 @@
 /**
- * @fileoverview Marked HTTP server.
+ * @fileoverview Markdown HTTP server.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.2.0.2, Jan 2, 2019
- * @since 1.0.0
+ * @version 1.3.0.0, Mar 15, 2019
  */
 
-const http = require('http');
-const marked = require('marked');
-const renderer = new marked.Renderer();
-const PORT = 8250;
+const http = require('http')
+const PORT = 8250
+const RENDER = 'markdown-it' // support 'markdown-it', 'marked'
+const TASKLICLASS = 'content-reset__task'
+const hljs = require('highlight.js')
 
-renderer.listitem = function (text) {
-  if (text.indexOf('<input') > -1) {
-    return `<li class="content-reset__task">${text}</li>`;
+class MD {
+  init () {
+    switch (RENDER) {
+      case 'marked':
+        this.mdRender = this.initMarked()
+        break
+      case 'markdown-it':
+        this.mdRender = this.initMarkdownIt()
+        break
+      default:
+        break
+    }
   }
 
-  return `<li>${text}</li>`;
-};
-
-marked.setOptions({
-  renderer: renderer,
-  gfm: true,
-  tables: true,
-  breaks: true,
-  smartLists: true,
-  highlight: function(code) {
-    return require('highlight.js').highlightAuto(code).value;
+  render (md) {
+    let html
+    switch (RENDER) {
+      case 'marked':
+        html = this.mdRender(md)
+        break
+      case 'markdown-it':
+        html = this.mdRender.render(md)
+        break
+      default:
+        html = md
+        break
+    }
+    return html
   }
-});
 
-process.on('uncaughtException', function (err) {
-  console.log(err);
-});
+  highlight (str, lang) {
+    if (lang === 'mermaid') {
+      return str
+    }
+    if (lang && hljs.getLanguage(lang)) {
+      return hljs.highlight(lang, str, true).value
+    }
+    return hljs.highlightAuto(str).value
+  }
 
-process.on('exit', function () {
-  console.log("exit");
-});
+  initMarked () {
+    const marked = require('marked')
+    const renderer = new marked.Renderer()
+    renderer.listitem = (text) => {
+      if (text.indexOf('<input') > -1) {
+        return `<li class="${TASKLICLASS}">${text}</li>`
+      }
+      return `<li>${text}</li>`
+    }
 
-process.on('SIGTERM', function () {
-  console.log("on signal [SIGTERM]");
-  process.exit(0);
-});
+    marked.setOptions({
+      renderer: renderer,
+      gfm: true,
+      tables: true,
+      breaks: true,
+      smartLists: true,
+      highlight: this.highlight,
+    })
+    return marked
+  }
 
-process.on('SIGINT', function () {
-  console.log("on signal [SIGINT]");
-  process.exit(0);
-});
+  initMarkdownIt () {
+    const MarkdownIt = require('markdown-it')
+    return new MarkdownIt({
+      html: true,
+      linkify: true,
+      typographer: true,
+      highlight: this.highlight,
+    }).use(require('markdown-it-task-checkbox'), {
+      disabled: true,
+      divWrap: false,
+      ulClass: '',
+      liClass: TASKLICLASS,
+    })
+  }
+}
 
-process.on('SIGUSR1', function () {
-  console.log("on signal [SIGUSR1]");
-  process.exit(0);
-});
+const md = new MD()
+md.init()
 
-process.on('SIGUSR2', function () {
-  console.log("on signal [SIGUSR2]");
-  process.exit(0);
-});
+process.on('uncaughtException', (e) => {
+  console.log(err)
+})
 
-const server = http.createServer(function (request, response) {
-  let mdContent = '';
+process.on('exit', () => {
+  console.log('exit')
+})
 
-  request.on('data', function (data) {
-    mdContent += data;
-  });
+process.on('SIGTERM', () => {
+  console.log('on signal [SIGTERM]')
+  process.exit(0)
+})
 
-  request.on('end', function () {
-    response.write(marked(mdContent));
+process.on('SIGINT', () => {
+  console.log('on signal [SIGINT]')
+  process.exit(0)
+})
 
-    response.end();
-  });
-});
+process.on('SIGUSR1', () => {
+  console.log('on signal [SIGUSR1]')
+  process.exit(0)
+})
 
-server.listen(PORT, '127.0.0.1');
-console.log("Marked engine is running at port: " + PORT);
+process.on('SIGUSR2', () => {
+  console.log('on signal [SIGUSR2]')
+  process.exit(0)
+})
+
+const server = http.createServer((request, response) => {
+  let mdContent = ''
+
+  request.on('data', (data) => {
+    mdContent += data
+  })
+
+  request.on('end', () => {
+    response.write(md.render(mdContent))
+    response.end()
+  })
+})
+
+server.listen(PORT, '127.0.0.1')
+console.log(`${RENDER} engine is running at port: ${PORT}`)
