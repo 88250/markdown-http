@@ -1,14 +1,14 @@
 {
-  "name": "http-marked",
-  "version": "1.0.0",
-  "description": "包装 Marked 作为 HTTP 服务发布。",
+  "name": "markdown-http",
+  "version": "2.0.0",
+  "description": "包装 Markdown 处理器以 HTTP 服务发布。",
   "homepage": "https://b3log.org",
   "repository": {
     "type": "git",
-    "url": "git://github.com/b3log/http-marked.git"
+    "url": "git://github.com/b3log/markdown-http.git"
   },
   "bugs": {
-    "url": "https://github.com/b3log/http-marked/issues"
+    "url": "https://github.com/b3log/markdown-http/issues"
   },
   "license": "MIT",
   "author": "Daniel <d@b3log.org> (http://88250.b3log.org) & Vanessa <v@b3log.org> (http://vanessa.b3log.org)",
