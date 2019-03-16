@@ -9,7 +9,7 @@
 const http = require('http')
 const PORT = 8250
 const RENDER = 'markdown-it' // support 'markdown-it', 'marked'
-const TASKLICLASS = 'content-reset__task'
+const TASKLICLASS = 'vditor-task'
 const hljs = require('highlight.js')
 
 const task = require('./markdown-it-task')
@@ -82,7 +82,7 @@ class MD {
       linkify: true,
       typographer: true,
       highlight: this.highlight,
-    }).use(task)
+    }).use(task, TASKLICLASS)
   }
 }
 
