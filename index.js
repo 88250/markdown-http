@@ -80,7 +80,6 @@ class MD {
     return new MarkdownIt({
       html: true,
       linkify: true,
-      typographer: true,
       highlight: this.highlight,
     }).use(task, TASKLICLASS)
   }
