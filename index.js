@@ -3,14 +3,14 @@
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.3.0.0, Mar 15, 2019
+ * @version 1.3.0.0, Apr 1, 2019
  */
 
 const http = require('http')
+const hljs = require('highlight.js')
 const PORT = 8250
 const RENDER = 'markdown-it' // support 'markdown-it', 'marked'
 const TASKLICLASS = 'vditor-task'
-const hljs = require('highlight.js')
 
 const task = require('./markdown-it-task')
 
@@ -49,9 +49,11 @@ class MD {
       return str
     }
     if (lang && hljs.getLanguage(lang)) {
-      return `<pre><code class="hljs">${hljs.highlight(lang, str, true).value}</code></pre>`;
+      return `<pre><code class="hljs">${hljs.highlight(lang, str,
+        true).value}</code></pre>`
     }
-    return `<pre><code class="hljs">${hljs.highlightAuto(str).value}</code></pre>`;
+    return `<pre><code class="hljs">${hljs.highlightAuto(
+      str).value}</code></pre>`
   }
 
   initMarked () {
@@ -81,6 +83,7 @@ class MD {
       html: true,
       linkify: true,
       highlight: this.highlight,
+      breaks: true,
     }).use(task, TASKLICLASS)
   }
 }
