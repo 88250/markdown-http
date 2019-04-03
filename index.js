@@ -3,7 +3,7 @@
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.3.0.0, Apr 1, 2019
+ * @version 1.3.1.0, Apr 2, 2019
  */
 
 const http = require('http')
@@ -49,7 +49,7 @@ class MD {
       return str
     }
     if (lang && hljs.getLanguage(lang)) {
-      return `<pre><code class="hljs">${hljs.highlight(lang, str,
+      return `<pre><code class="language-${lang} hljs">${hljs.highlight(lang, str,
         true).value}</code></pre>`
     }
     return `<pre><code class="hljs">${hljs.highlightAuto(
