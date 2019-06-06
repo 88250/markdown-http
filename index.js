@@ -13,6 +13,7 @@ const RENDER = 'markdown-it' // support 'markdown-it', 'marked'
 const TASKLICLASS = 'vditor-task'
 
 const task = require('./markdown-it-task')
+const chart = require('./markdown-it-chart')
 
 class MD {
   init () {
@@ -84,7 +85,7 @@ class MD {
       linkify: true,
       highlight: this.highlight,
       breaks: true,
-    }).use(task, TASKLICLASS)
+    }).use(task, TASKLICLASS).use(chart)
   }
 }
 
