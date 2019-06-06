@@ -13,7 +13,6 @@ const RENDER = 'markdown-it' // support 'markdown-it', 'marked'
 const TASKLICLASS = 'vditor-task'
 
 const task = require('./markdown-it-task')
-const chart = require('./markdown-it-chart')
 
 class MD {
   init () {
@@ -46,7 +45,7 @@ class MD {
   }
 
   highlight (str, lang) {
-    if (lang === 'mermaid') {
+    if (lang === 'mermaid' || lang === 'echart') {
       return str
     }
     if (lang && hljs.getLanguage(lang)) {
@@ -85,7 +84,7 @@ class MD {
       linkify: true,
       highlight: this.highlight,
       breaks: true,
-    }).use(task, TASKLICLASS).use(chart)
+    }).use(task, TASKLICLASS)
   }
 }
 
