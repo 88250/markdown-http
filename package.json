@@ -26,8 +26,8 @@
     "start": "node index.js"
   },
   "devDependencies": {
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^9.15.9",
     "markdown-it": "^9.0.1",
-    "marked": "^0.6.1"
+    "marked": "^0.7.0"
   }
 }
