@@ -45,7 +45,7 @@ class MD {
   }
 
   highlight (str, lang) {
-    if (lang === 'mermaid' || lang === 'echarts') {
+    if (lang === 'mermaid' || lang === 'echarts' || lang === 'abc') {
       return str
     }
     if (lang && hljs.getLanguage(lang)) {
