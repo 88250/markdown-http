@@ -1,5 +1,5 @@
 <p align = "center">
-<em>该项目将逐步停止支持，请使用 <a href="https://github.com/b3log/lute">Lute</a> 替代</em>
+<em>该项目将逐步停止支持，请使用 <a href="https://github.com/b3log/lute-http">Lute HTTP</a> 替代</em>
 </p>
 
 ---
