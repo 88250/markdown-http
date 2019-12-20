@@ -1,5 +1,5 @@
 <p align = "center">
-<em>该项目将逐步停止支持，请使用 <a href="https://github.com/b3log/lute-http">Lute HTTP</a> 替代</em>
+<em>该项目将逐步停止支持，请使用 <a href="https://github.com/88250/lute-http">Lute HTTP</a> 替代</em>
 </p>
 
 ---
@@ -12,7 +12,7 @@
 
 ## 背景
 
-该项目主要是为了让 [Sym](https://github.com/b3log/symphony)、[Solo](https://github.com/b3log/solo)、[Pipe](https://github.com/b3log/pipe) 提供更好的 Markdown 渲染，解决各项目内建的 Markdown 处理不统一的问题。
+该项目主要是为了让 [Sym](https://github.com/88250/symphony)、[Solo](https://github.com/88250/solo)、[Pipe](https://github.com/88250/pipe) 提供更好的 Markdown 渲染，解决各项目内建的 Markdown 处理不统一的问题。
 
 ## 文档
 
